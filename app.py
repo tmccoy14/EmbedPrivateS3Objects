@@ -8,7 +8,7 @@ app = Flask(__name__)
 @app.route("/")
 def hello():
     return (
-        "Navigate to /<resource> to see embedded image pulled from private s3 bucket!"
+        "Navigate to /<resource> to see embedded object pulled from private s3 bucket!"
     )
 
 
@@ -22,7 +22,7 @@ def download_image(resource):
     )
     url = s3Client.generate_presigned_url(
         "get_object",
-        Params={"Bucket": "object-storage-auth", "Key": resource},
+        Params={"Bucket": "<S3-BUCKET-NAME>", "Key": resource},
         ExpiresIn=100,
     )
     return render_template("index.html", url=url)
